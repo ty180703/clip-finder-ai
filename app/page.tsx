@@ -1,3 +1,5 @@
+import ClipFinderForm from "@/components/ClipFinderForm";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
@@ -10,9 +12,7 @@ export default function Home() {
         </div>
       </header>
       <main className="mx-auto max-w-2xl px-6 py-12">
-        <div className="rounded-lg border border-dashed border-gray-300 px-6 py-16 text-center text-gray-400">
-          Form will go here
-        </div>
+        <ClipFinderForm />
       </main>
     </div>
   );
