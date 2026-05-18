@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { EXAMPLE_TRANSCRIPTS } from "@/lib/example-transcripts";
+import { validateTranscript } from "@/lib/validate-transcript";
 
 type ClipType = "funny" | "inspirational" | "educational" | "viral" | "custom";
 
@@ -17,6 +18,7 @@ export default function ClipFinderForm() {
   const [transcript, setTranscript] = useState("");
   const [clipType, setClipType] = useState<ClipType>("funny");
   const [customPrompt, setCustomPrompt] = useState("");
+  const [transcriptError, setTranscriptError] = useState<string | null>(null);
 
   const isDisabled =
     transcript.trim() === "" ||
@@ -24,6 +26,11 @@ export default function ClipFinderForm() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const result = validateTranscript(transcript);
+    if (!result.ok) {
+      setTranscriptError(result.error);
+      return;
+    }
     console.log({ transcript, clipType, customPrompt });
   }
 
@@ -52,8 +59,14 @@ export default function ClipFinderForm() {
           className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-gray-500 focus:outline-none"
           placeholder="Paste a transcript with timestamps, e.g. [00:00:14] Speaker: ..."
           value={transcript}
-          onChange={(e) => setTranscript(e.target.value)}
+          onChange={(e) => {
+            setTranscript(e.target.value);
+            setTranscriptError(null);
+          }}
         />
+        {transcriptError && (
+          <p className="text-xs text-red-600">{transcriptError}</p>
+        )}
       </div>
 
       <div className="flex flex-col gap-2">
