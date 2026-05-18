@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { EXAMPLE_TRANSCRIPTS } from "@/lib/example-transcripts";
 
 type ClipType = "funny" | "inspirational" | "educational" | "viral" | "custom";
 
@@ -29,9 +30,22 @@ export default function ClipFinderForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="transcript" className="text-sm font-medium text-gray-700">
-          Transcript
-        </label>
+        <div className="flex items-baseline gap-3">
+          <label htmlFor="transcript" className="text-sm font-medium text-gray-700">
+            Transcript
+          </label>
+          <span className="text-xs text-gray-400">Try an example:</span>
+          {EXAMPLE_TRANSCRIPTS.map((ex) => (
+            <button
+              key={ex.id}
+              type="button"
+              onClick={() => setTranscript(ex.transcript)}
+              className="text-xs text-gray-500 underline underline-offset-2 hover:text-gray-800"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
         <textarea
           id="transcript"
           rows={8}
