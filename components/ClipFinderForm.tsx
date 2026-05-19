@@ -68,17 +68,17 @@ export default function ClipFinderForm() {
     <div className="flex flex-col gap-8">
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <div className="flex flex-col gap-1.5">
-          <div className="flex items-baseline gap-3">
-            <label htmlFor="transcript" className="text-sm font-medium text-gray-700">
+          <div className="flex flex-wrap items-baseline gap-2">
+            <label htmlFor="transcript" className="text-sm font-medium text-slate-700">
               Transcript
             </label>
-            <span className="text-xs text-gray-400">Try an example:</span>
+            <span className="text-xs text-slate-500">Try an example:</span>
             {EXAMPLE_TRANSCRIPTS.map((ex) => (
               <button
                 key={ex.id}
                 type="button"
                 onClick={() => setTranscript(ex.transcript)}
-                className="text-xs text-gray-500 underline underline-offset-2 hover:text-gray-800"
+                className="text-xs text-slate-500 hover:underline"
               >
                 {ex.label}
               </button>
@@ -87,7 +87,7 @@ export default function ClipFinderForm() {
           <textarea
             id="transcript"
             rows={8}
-            className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-gray-500 focus:outline-none"
+            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400"
             placeholder="Paste a transcript with timestamps, e.g. [00:00:14] Speaker: ..."
             value={transcript}
             onChange={(e) => {
@@ -101,17 +101,17 @@ export default function ClipFinderForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-gray-700">What kind of clips?</span>
+          <span className="text-sm font-medium text-slate-700">What kind of clips?</span>
           <div className="flex flex-wrap gap-2">
             {PRESETS.map(({ label, value }) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => setClipType(value)}
-                className={`rounded border px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`rounded border px-3 py-1 text-sm font-medium transition-colors ${
                   clipType === value
-                    ? "border-gray-900 bg-gray-900 text-white"
-                    : "border-gray-300 bg-white text-gray-700 hover:border-gray-500"
+                    ? "border-accent-500 bg-accent-500 text-white"
+                    : "border-slate-300 bg-white text-slate-700 hover:border-accent-300 hover:text-accent-700"
                 }`}
               >
                 {label}
@@ -122,7 +122,7 @@ export default function ClipFinderForm() {
           {clipType === "custom" && (
             <input
               type="text"
-              className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-gray-500 focus:outline-none"
+              className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400"
               placeholder="Describe the kind of clips you want, e.g. find clips about love"
               value={customPrompt}
               onChange={(e) => setCustomPrompt(e.target.value)}
@@ -133,7 +133,7 @@ export default function ClipFinderForm() {
         <button
           type="submit"
           disabled={isDisabled}
-          className="self-start rounded border border-gray-900 bg-gray-900 px-5 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-40"
+          className="w-full rounded-md bg-accent-500 px-5 py-2 text-sm font-medium text-white hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
         >
           {isLoading ? "Finding clips..." : "Find clips"}
         </button>

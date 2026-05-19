@@ -10,6 +10,16 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-accent-50: #fdf2f4;
+  --color-accent-100: #fce7eb;
+  --color-accent-200: #f9d0d8;
+  --color-accent-300: #f4a9b7;
+  --color-accent-400: #e88497;
+  --color-accent-500: #cb7186;
+  --color-accent-600: #b85a72;
+  --color-accent-700: #9a4760;
+  --color-accent-800: #7e3a50;
+  --color-accent-900: #693342;
 }
 
 @media (prefers-color-scheme: dark) {
